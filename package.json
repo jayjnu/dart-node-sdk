@@ -14,7 +14,9 @@
     "clean": "./node_modules/.bin/rimraf dist",
     "prepare": "husky install",
     "commit": "./node_modules/.bin/cz",
-    "lint": "eslint . --ext .js,.ts"
+    "lint": "eslint . --ext .js,.ts",
+    "format:check": "prettier --check .",
+    "format": "prettier --write ."
   },
   "repository": {
     "type": "git",
@@ -45,9 +47,11 @@
     "@typescript-eslint/parser": "^4.25.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.27.0",
+    "eslint-config-prettier": "^8.3.0",
     "husky": "^6.0.0",
     "jest": "^27.0.3",
     "lint-staged": "^11.0.0",
+    "prettier": "2.3.0",
     "rimraf": "^3.0.2",
     "typescript": "^4.3.2"
   },
@@ -57,6 +61,7 @@
     }
   },
   "lint-staged": {
-    "*.{ts,js}": "eslint --cache --fix"
+    "*.{ts,js}": "eslint --cache --fix",
+    "**/*": "prettier --write --ignore-unknown"
   }
 }
