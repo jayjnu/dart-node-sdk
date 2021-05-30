@@ -1,0 +1,25 @@
+{
+  "name": "dart-node-sdk",
+  "version": "0.0.1",
+  "description": "dart api implementation in node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jayjnu/dart-node-sdk.git"
+  },
+  "keywords": [
+    "dart",
+    "재무제표",
+    "sdk",
+    "api"
+  ],
+  "author": "Jinwoo Jung <doublejnu@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jayjnu/dart-node-sdk/issues"
+  },
+  "homepage": "https://github.com/jayjnu/dart-node-sdk#readme"
+}
