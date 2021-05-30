@@ -14,7 +14,7 @@
     "clean": "./node_modules/.bin/rimraf dist",
     "prepare": "husky install",
     "commit": "./node_modules/.bin/cz",
-    "lint": "eslint src --ext .ts"
+    "lint": "eslint . --ext .js,.ts"
   },
   "repository": {
     "type": "git",
@@ -57,6 +57,6 @@
     }
   },
   "lint-staged": {
-    "*.ts": "eslint --cache --fix"
+    "*.{ts,js}": "eslint --cache --fix"
   }
 }
