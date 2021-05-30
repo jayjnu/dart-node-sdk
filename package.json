@@ -13,7 +13,8 @@
     "test": "jest",
     "clean": "./node_modules/.bin/rimraf dist",
     "prepare": "husky install",
-    "commit": "./node_modules/.bin/cz"
+    "commit": "./node_modules/.bin/cz",
+    "lint": "eslint src --ext .ts"
   },
   "repository": {
     "type": "git",
@@ -40,7 +41,10 @@
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
     "@types/jest": "^26.0.23",
+    "@typescript-eslint/eslint-plugin": "^4.25.0",
+    "@typescript-eslint/parser": "^4.25.0",
     "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^7.27.0",
     "husky": "^6.0.0",
     "jest": "^27.0.3",
     "rimraf": "^3.0.2",
