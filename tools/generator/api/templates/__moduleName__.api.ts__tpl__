@@ -1,0 +1,8 @@
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface <%= className %>Request {}
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface <%= className %>Response {}
+
+export class <%= className %>API {
+}
