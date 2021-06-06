@@ -4,6 +4,15 @@ module.exports = (api) => {
   return {
     presets: ['@babel/env', '@babel/typescript'],
     plugins: [
+      [
+        'module-resolver',
+        {
+          root: ['./src'],
+          alias: {
+            '~': './lib',
+          },
+        },
+      ],
       '@babel/proposal-class-properties',
       '@babel/proposal-object-rest-spread',
     ],
