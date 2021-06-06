@@ -1,3 +1,5 @@
+import type { HttpClient } from './../util/http.util';
+
 export interface CompanyRequest {
   crtfc_key: string;
   corp_code: string;
@@ -79,4 +81,6 @@ export interface CompanyResponse {
   acc_mt: string;
 }
 
-export class CompanyAPI {}
+export class CompanyAPI {
+  constructor(private http: HttpClient) {}
+}
