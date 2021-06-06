@@ -48,6 +48,7 @@
     "@types/jest": "^26.0.23",
     "@typescript-eslint/eslint-plugin": "^4.25.0",
     "@typescript-eslint/parser": "^4.25.0",
+    "babel-plugin-module-resolver": "^4.1.0",
     "colors": "^1.4.0",
     "cz-conventional-changelog": "^3.3.0",
     "ejs": "^3.1.6",
