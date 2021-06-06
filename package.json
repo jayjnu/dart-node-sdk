@@ -69,5 +69,8 @@
   "lint-staged": {
     "*.{ts,js}": "eslint --cache --fix",
     "**/*": "prettier --write --ignore-unknown"
+  },
+  "dependencies": {
+    "got": "^11.8.2"
   }
 }
