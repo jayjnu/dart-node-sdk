@@ -1,0 +1,7 @@
+import {<%= className %>API} from './<%= name %>.api';
+
+describe('<%= className %>API', () => {
+  it('should pass', () => {
+    expect(<%= className %>API).toBeDefined();
+  });
+});

@@ -1,0 +1,10 @@
+{
+  "sourceRoot": "./src/lib",
+  "modules": {
+    "api": {},
+    "fs": {},
+    "model": {},
+    "request": {},
+    "response": {}
+  }
+}
