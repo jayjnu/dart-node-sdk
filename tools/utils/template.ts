@@ -1,5 +1,4 @@
 import ejs from 'ejs';
-import { Workspace } from './workspace';
 import { join } from 'path';
 import { readdirSync, readFileSync } from 'fs';
 
