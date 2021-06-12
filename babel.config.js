@@ -2,7 +2,10 @@ module.exports = (api) => {
   const isTest = api.env('test');
 
   return {
-    presets: ['@babel/env', '@babel/typescript'],
+    presets: [
+      ['@babel/env', { targets: { node: 'current' } }],
+      '@babel/typescript',
+    ],
     plugins: [
       [
         'module-resolver',
