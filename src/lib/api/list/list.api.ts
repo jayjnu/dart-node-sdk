@@ -1,3 +1,5 @@
+import { HttpClient } from '~/util/http.util';
+
 type DataType = 'json' | 'xml';
 
 export interface ListRequest {
@@ -33,31 +35,35 @@ export interface ListResponse {
   /** 에러 및 정보 메시지 */
   message: string;
   /** 페이지 번호 */
-  page_no: string;
+  page_no: number;
   /** 페이지 별 건수 */
-  page_count: string;
+  page_count: number;
   /** 총 건수 */
-  total_count: string;
+  total_count: number;
   /** 총 페이지 수 */
-  total_page: string;
-  /** 법인구분 */
-  corp_cls: string;
-  /** 종목명(법인명) */
-  corp_name: string;
-  /** 고유번호 */
-  corp_code: string;
-  /** 종목코드 */
-  stock_code: string;
-  /** 보고서명 */
-  report_nm: string;
-  /** 접수번호 */
-  rcept_no: string;
-  /** 공시 제출인명 */
-  flr_nm: string;
-  /** 접수일자 */
-  rcept_dt: string;
-  /** 비고 */
-  rm: string;
+  total_page: number;
+  list: {
+    /** 법인구분 */
+    corp_cls: string;
+    /** 종목명(법인명) */
+    corp_name: string;
+    /** 고유번호 */
+    corp_code: string;
+    /** 종목코드 */
+    stock_code: string;
+    /** 보고서명 */
+    report_nm: string;
+    /** 접수번호 */
+    rcept_no: string;
+    /** 공시 제출인명 */
+    flr_nm: string;
+    /** 접수일자 */
+    rcept_dt: string;
+    /** 비고 */
+    rm: string;
+  }[];
 }
 
-export class ListAPI {}
+export class ListAPI {
+  constructor(private http: HttpClient) {}
+}
