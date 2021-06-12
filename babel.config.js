@@ -3,14 +3,7 @@ module.exports = (api) => {
 
   return {
     presets: [
-      [
-        '@babel/preset-env',
-        {
-          targets: {
-            node: 'current',
-          },
-        },
-      ],
+      ['@babel/env', { targets: { node: 'current' } }],
       '@babel/typescript',
     ],
     plugins: [

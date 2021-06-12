@@ -1,3 +1,5 @@
+import type {HttpClient} from '~/util/http.util';
+
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface <%= className %>Request {}
 
@@ -5,4 +7,5 @@ export interface <%= className %>Request {}
 export interface <%= className %>Response {}
 
 export class <%= className %>API {
+  constructor(private http: HttpClient) {}
 }
