@@ -15,6 +15,7 @@ module.exports = (api) => {
       ],
       '@babel/proposal-class-properties',
       '@babel/proposal-object-rest-spread',
+      '@babel/plugin-transform-runtime',
     ],
     ignore: isTest ? [] : ['**/__tests__', '**/*.spec.ts'],
   };
