@@ -1,6 +1,7 @@
+import { mapEntries } from '~/util/object.util';
+
 import type { HttpClient } from '~/util/http.util';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface CorpCodeRequest {
   cert_key: string;
 }
@@ -66,26 +67,13 @@ export class CorpCodeAPI {
       result: {
         ...json.result,
         list: json.result.list.map((item) => {
-          return this.mapEntries<string[]>(item, ([key, value]) => [
+          return mapEntries<string[], Corp>(item, ([key, value]) => [
             key,
             this.flattenValue(value),
           ]);
         }),
       },
     };
-  }
-
-  private mapEntries<T>(
-    obj: Record<string, T>,
-    transform: (entry: [string, T]) => [string, unknown]
-  ) {
-    const map = new Map();
-
-    Object.entries(obj).forEach((entry) => {
-      map.set(...transform(entry));
-    });
-
-    return Object.fromEntries(map);
   }
 
   private flattenValue(values: string[]): string {
