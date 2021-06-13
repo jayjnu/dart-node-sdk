@@ -56,7 +56,7 @@ export class CorpCodeAPI {
   private fetch() {
     return this.http.get('corpCode.xml', {
       searchParams: {
-        cert_key: this.cert_key,
+        crtfc_key: this.cert_key,
       },
     });
   }

@@ -8,7 +8,7 @@ const xml = readFileSync(join(__dirname, '../data/corpCode.xml.zip')).toString(
 
 export default [
   rest.get('https://opendart.fss.or.kr/api/corpCode.xml', (req, res, ctx) => {
-    if (!req.url.searchParams.has('cert_key')) {
+    if (!req.url.searchParams.has('crtfc_key')) {
       return res(
         ctx.status(200),
         ctx.json({

@@ -3,7 +3,7 @@ import COMPANY_DATA from '../data/company';
 
 export default [
   rest.get('https://opendart.fss.or.kr/api/company.json', (req, res, ctx) => {
-    if (!req.url.searchParams.has('cert_key')) {
+    if (!req.url.searchParams.has('crtfc_key')) {
       return res(ctx.status(403));
     }
 
