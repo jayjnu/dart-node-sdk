@@ -8,7 +8,7 @@
     "type-check:watch": "npm run type-check -- --watch",
     "prebuild": "npm run clean",
     "build": "npm run build:types && npm run build:js",
-    "build:types": "tsc --emitDeclarationOnly",
+    "build:types": "tsc -p ./tsconfig.build.json",
     "build:js": "babel src --out-dir dist --extensions \".ts,.tsx\" --source-maps inline",
     "test": "jest",
     "clean": "./node_modules/.bin/rimraf dist",

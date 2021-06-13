@@ -1,4 +1,4 @@
-import type { HttpClient } from './../util/http.util';
+import type { HttpClient } from '~/util/http.util';
 
 export interface CompanyRequest {
   crtfc_key: string;
@@ -82,5 +82,13 @@ export interface CompanyResponse {
 }
 
 export class CompanyAPI {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private cert_key: string) {}
+
+  async getJSON(corp_code: string): Promise<CompanyResponse> {
+    return this.http.get(this.createURL(corp_code)).json();
+  }
+
+  private createURL(corp_code: string) {
+    return `company.json?cert_key=${this.cert_key}&corp_code=${corp_code}`;
+  }
 }
