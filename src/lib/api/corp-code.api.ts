@@ -12,15 +12,24 @@ export interface Corp {
   modify_date: string;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface CorpCodeResponse {
+interface BaseCorpCodeResponse<T> {
   status: string;
   message: string;
   result: {
-    list: Corp[];
+    list: T[];
   };
 }
 
+interface XMLItem extends Record<string, string[]> {
+  corp_code: string[];
+  corp_name: string[];
+  stock_code: string[];
+  modify_date: string[];
+}
+
+export type CorpCodeResponse = BaseCorpCodeResponse<Corp>;
+
+export type XMLParsingResult = BaseCorpCodeResponse<XMLItem>;
 export interface XMLHandler<T> {
   fromZipBuffer(buffer: Buffer): XMLHandlingProcess<T>;
 }
@@ -33,14 +42,14 @@ export class CorpCodeAPI {
   constructor(
     private http: HttpClient,
     private cert_key: string,
-    private xmlHandler: XMLHandler<CorpCodeResponse>
+    private xmlHandler: XMLHandler<XMLParsingResult>
   ) {}
 
   async getJSON(): Promise<CorpCodeResponse> {
     const zippedXML = await this.fetch().buffer();
     const json = await this.xmlHandler.fromZipBuffer(zippedXML).json();
 
-    return json;
+    return this.normalizeJSON(json);
   }
 
   private fetch() {
@@ -49,5 +58,37 @@ export class CorpCodeAPI {
         cert_key: this.cert_key,
       },
     });
+  }
+
+  private normalizeJSON(json: XMLParsingResult): CorpCodeResponse {
+    return {
+      ...json,
+      result: {
+        ...json.result,
+        list: json.result.list.map((item) => {
+          return this.mapEntries<string[]>(item, ([key, value]) => [
+            key,
+            this.flattenValue(value),
+          ]);
+        }),
+      },
+    };
+  }
+
+  private mapEntries<T>(
+    obj: Record<string, T>,
+    transform: (entry: [string, T]) => [string, unknown]
+  ) {
+    const map = new Map();
+
+    Object.entries(obj).forEach((entry) => {
+      map.set(...transform(entry));
+    });
+
+    return Object.fromEntries(map);
+  }
+
+  private flattenValue(values: string[]): string {
+    return values.find(() => true)?.trim() || '';
   }
 }

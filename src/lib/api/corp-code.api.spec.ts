@@ -1,17 +1,17 @@
 import { httpClient } from '../util/http.util';
 import {
   CorpCodeAPI,
-  CorpCodeResponse,
   XMLHandler,
   XMLHandlingProcess,
+  XMLParsingResult,
 } from './corp-code.api';
 
 const MOCK_CERT = 'Xxxxxxx';
 const mockJSON = jest.fn();
-const mockXMLHandlingProcess: XMLHandlingProcess<CorpCodeResponse> = {
+const mockXMLHandlingProcess: XMLHandlingProcess<XMLParsingResult> = {
   json: mockJSON,
 };
-const mockXMLHandler: XMLHandler<CorpCodeResponse> = {
+const mockXMLHandler: XMLHandler<XMLParsingResult> = {
   fromZipBuffer: () => {
     return mockXMLHandlingProcess;
   },
@@ -24,10 +24,10 @@ describe('.getJSON()', () => {
       result: {
         list: [
           {
-            corp_code: '00434003',
-            corp_name: '다코',
-            stock_code: '',
-            modify_date: '20170630',
+            corp_code: ['00434003'],
+            corp_name: ['다코'],
+            stock_code: [' '],
+            modify_date: ['20170630'],
           },
         ],
       },
@@ -38,6 +38,18 @@ describe('.getJSON()', () => {
 
     const res = await api.getJSON();
 
-    expect(res.status).toBe('000');
+    expect(res).toEqual({
+      status: '000',
+      result: {
+        list: [
+          {
+            corp_code: '00434003',
+            corp_name: '다코',
+            stock_code: '',
+            modify_date: '20170630',
+          },
+        ],
+      },
+    });
   });
 });
