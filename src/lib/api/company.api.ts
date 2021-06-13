@@ -89,6 +89,6 @@ export class CompanyAPI {
   }
 
   private createURL(corp_code: string) {
-    return `company.json?cert_key=${this.cert_key}&corp_code=${corp_code}`;
+    return `company.json?crtfc_key=${this.cert_key}&corp_code=${corp_code}`;
   }
 }
