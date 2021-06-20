@@ -10,7 +10,7 @@ export interface GeneratorOptions {
   test?: boolean;
 }
 
-export function generator(options: GeneratorOptions) {
+export function generator(options: GeneratorOptions): Generator {
   const workspace = getWorkspace();
   const template = new Template();
 
@@ -29,7 +29,7 @@ export class Generator {
     const files = this.template.render(this.options.module, this.options.name);
 
     files.forEach((file) => {
-      this.generateFile(this.workspace.resolve(this.options.module), file);
+      Generator.generateFile(this.workspace.resolve(this.options.module), file);
     });
   }
 
@@ -41,7 +41,10 @@ export class Generator {
     }
   }
 
-  private generateFile(outputPath: string, { code, filename }: RenderResult) {
+  private static generateFile(
+    outputPath: string,
+    { code, filename }: RenderResult
+  ) {
     const filePath = join(outputPath, filename);
 
     console.log(colors.cyan('[CREATE] %s in %s'), filename, filePath);
