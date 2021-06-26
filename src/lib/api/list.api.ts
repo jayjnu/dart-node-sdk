@@ -1,4 +1,5 @@
 import { HttpClient } from '~/util/http.util';
+import { ResponseCommon } from './type';
 
 export interface ListRequest {
   /**
@@ -47,15 +48,7 @@ export interface ListRequest {
   page_count?: string;
 }
 
-export interface ListResponse {
-  /**
-   * 에러 및 정보 코드
-   */
-  status: string;
-  /**
-   * 에러 및 정보 메시지
-   */
-  message: string;
+export interface ListResponse extends ResponseCommon {
   /**
    * 페이지 번호
    */
@@ -115,6 +108,7 @@ export interface ListResponse {
 export class ListAPI {
   constructor(private http: HttpClient, private cert_key: string) {}
 
+  // TODO HttpClient class 로 중복 제거
   async getJSON(params: ListRequest): Promise<ListResponse> {
     const json = (await this.http
       .get(ListAPI.createURL(), {
