@@ -2,10 +2,6 @@ import { mapEntries } from '~/util/object.util';
 
 import type { HttpClient } from '~/util/http.util';
 
-export interface CorpCodeRequest {
-  cert_key: string;
-}
-
 export interface Corp {
   corp_code: number;
   corp_name: string;
@@ -69,14 +65,14 @@ export class CorpCodeAPI {
         list: json.result.list.map((item) => {
           return mapEntries<string[], Corp>(item, ([key, value]) => [
             key,
-            this.flattenValue(value),
+            CorpCodeAPI.flattenValue(value),
           ]);
         }),
       },
     };
   }
 
-  private flattenValue(values: string[]): string {
+  private static flattenValue(values: string[]): string {
     return values.find(() => true)?.trim() || '';
   }
 }

@@ -7,9 +7,7 @@ export class XMLUnzipper {
   async unzip(): Promise<Buffer> {
     const zipFile = await this.readFromBuffer();
     const zipFileStream = new ZipFileStream(zipFile);
-    const resultText = await zipFileStream.toString();
-
-    return resultText;
+    return await zipFileStream.toString();
   }
 
   private readFromBuffer(): Promise<ZipFile> {
@@ -21,7 +19,7 @@ export class XMLUnzipper {
         }
 
         if (!zipfile) {
-          rej(new Error('No ZippFile was read'));
+          rej(new Error('No ZipFile was read'));
           return;
         }
 
@@ -35,7 +33,7 @@ class ZipFileStream {
   constructor(private zipFile: ZipFile) {}
 
   async toString() {
-    const outputStream = this.createOutputStream();
+    const outputStream = ZipFileStream.createOutputStream();
     const output = this.streamToString(outputStream);
 
     await this.read(outputStream);
@@ -85,7 +83,7 @@ class ZipFileStream {
     });
   }
 
-  private createOutputStream() {
+  private static createOutputStream() {
     return new Transform({
       objectMode: true,
       transform(data: Buffer, enc, done) {
