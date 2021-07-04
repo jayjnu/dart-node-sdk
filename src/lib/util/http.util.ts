@@ -24,7 +24,7 @@ export default class HttpClient {
 
   async getJSON<T extends ResponseCommon>(
     url: string,
-    params: Record<string, unknown>
+    params?: Record<string, unknown>
   ): Promise<T> {
     const json = await this.fetch(url, params).json<T>();
 
