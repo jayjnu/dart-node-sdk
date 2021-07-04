@@ -1,5 +1,5 @@
-import { HttpClient } from '~/util/http.util';
 import { ResponseCommon } from './type';
+import HttpClient2 from '../util/http.util';
 
 export interface ListRequest {
   /**
@@ -106,27 +106,13 @@ export interface ListResponse extends ResponseCommon {
 }
 
 export class ListAPI {
-  constructor(private http: HttpClient, private cert_key: string) {}
-
-  // TODO HttpClient class 로 중복 제거
-  async getJSON(params: ListRequest): Promise<ListResponse> {
-    const json = (await this.http
-      .get(ListAPI.createURL(), {
-        searchParams: {
-          cert_key: this.cert_key,
-          ...params,
-        },
-      })
-      .json()) as ListResponse;
-
-    if (json.status !== '000') {
-      throw new Error(json.message);
-    }
-
-    return json;
+  private endpoint = 'list.json';
+  private http: HttpClient2;
+  constructor(private cert_key: string) {
+    this.http = new HttpClient2(this.endpoint, cert_key);
   }
 
-  private static createURL() {
-    return 'list.json';
+  async getJSON(params: ListRequest): Promise<ListResponse> {
+    return this.http.getJSON({ ...params });
   }
 }
