@@ -1,5 +1,5 @@
 import { ResponseCommon } from './type';
-import HttpClient2 from '../util/http.util';
+import HttpClient from '~/util/http.util';
 
 export interface ListRequest {
   /**
@@ -107,12 +107,9 @@ export interface ListResponse extends ResponseCommon {
 
 export class ListAPI {
   private endpoint = 'list.json';
-  private http: HttpClient2;
-  constructor(private cert_key: string) {
-    this.http = new HttpClient2(this.endpoint, cert_key);
-  }
+  constructor(private http: HttpClient) {}
 
   async getJSON(params: ListRequest): Promise<ListResponse> {
-    return this.http.getJSON({ ...params });
+    return this.http.getJSON(this.endpoint, { ...params });
   }
 }

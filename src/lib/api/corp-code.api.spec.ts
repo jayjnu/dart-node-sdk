@@ -1,4 +1,4 @@
-import { httpClient } from '../util/http.util';
+import HttpClient from '~/util/http.util';
 import {
   CorpCodeAPI,
   XMLHandler,
@@ -32,7 +32,8 @@ describe('.getJSON()', () => {
         ],
       },
     };
-    const api = new CorpCodeAPI(httpClient, MOCK_CERT, mockXMLHandler);
+    const http = new HttpClient(MOCK_CERT);
+    const api = new CorpCodeAPI(http, mockXMLHandler);
 
     mockJSON.mockResolvedValueOnce(response);
 
