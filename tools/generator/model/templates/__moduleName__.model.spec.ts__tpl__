@@ -1,0 +1,7 @@
+import {<%= className %>Model} from './<%= name %>.model';
+
+describe('<%= className %>Model', () => {
+  it('should pass', () => {
+    expect(<%= className %>Model).toBeDefined();
+  });
+});

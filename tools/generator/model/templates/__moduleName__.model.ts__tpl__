@@ -1,0 +1,5 @@
+import type {<%= className %>API} from '~/api/<%= name %>.api';
+
+export class <%= className %>Model {
+  constructor(private api: <%= className %>API) {}
+}
