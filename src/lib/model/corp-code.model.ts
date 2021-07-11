@@ -13,6 +13,13 @@ export class CorpCodeModel {
     name: string,
     options?: CorpSearchOptions
   ): Promise<Corp[]> {
-    return [];
+    const res = await this.api.getJSON();
+
+    const isExactMatch = (corp: Corp) => corp.corp_name === name;
+    // TODO: 구현필요
+    const isPartialMatch = () => false;
+    const match = options?.exact ? isExactMatch : isPartialMatch;
+
+    return res.result.list.filter(match);
   }
 }
