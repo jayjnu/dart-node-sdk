@@ -16,8 +16,7 @@ export class CorpCodeModel {
     const res = await this.api.getJSON();
 
     const isExactMatch = (corp: Corp) => corp.corp_name === name;
-    // TODO: 구현필요
-    const isPartialMatch = () => false;
+    const isPartialMatch = (corp: Corp) => corp.corp_name.includes(name);
     const match = options?.exact ? isExactMatch : isPartialMatch;
 
     return res.result.list.filter(match);

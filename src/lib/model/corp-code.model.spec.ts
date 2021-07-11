@@ -47,7 +47,18 @@ describe('CorpCodeModel', () => {
       expect(corpList.length).toBe(1);
       expect(corpList[0].corp_name).toBe(fixtures[0].corp_name);
     });
-    it.todo('options.exact === false면 name이 포함되는 corp 목록을 반환한다.');
+    it('options.exact === false면 name이 포함되는 corp 목록을 반환한다.', async () => {
+      const options = {
+        exact: false,
+      };
+      const api = createMockAPI();
+      const model = new CorpCodeModel(api);
+      const corpList = await model.getCorpByName('삼성', options);
+
+      expect(corpList.length).toBe(2);
+      expect(corpList[0].corp_name).toBe(fixtures[0].corp_name);
+      expect(corpList[1].corp_name).toBe(fixtures[1].corp_name);
+    });
     it.todo('매칭되는 항목이 없으면 빈 배열을 반환한다.');
   });
 });
