@@ -14,14 +14,16 @@ import type {
   Response,
   BeforeErrorHook,
   BeforeRedirectHook,
+  BeforeRetryHook,
 } from 'got';
 
 export interface HttpInterceptor {
-  init?: InitHook;
-  beforeRequest?: BeforeRequestHook;
-  beforeError?: BeforeErrorHook;
-  afterResponse?: AfterResponseHook;
-  beforeRedirect?: BeforeRedirectHook;
+  init: InitHook;
+  beforeRequest: BeforeRequestHook;
+  beforeError: BeforeErrorHook;
+  beforeRedirect: BeforeRedirectHook;
+  beforeRetry: BeforeRetryHook;
+  afterResponse: AfterResponseHook;
 }
 
 export default class HttpClient {
