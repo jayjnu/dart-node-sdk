@@ -8,12 +8,20 @@ import type {
   Got,
   CancelableRequest,
   BeforeRequestHook,
+  AfterResponseHook,
+  InitHook,
   Hooks,
   Response,
+  BeforeErrorHook,
+  BeforeRedirectHook,
 } from 'got';
 
 export interface HttpInterceptor {
-  beforeRequest: BeforeRequestHook;
+  init?: InitHook;
+  beforeRequest?: BeforeRequestHook;
+  beforeError?: BeforeErrorHook;
+  afterResponse?: AfterResponseHook;
+  beforeRedirect?: BeforeRedirectHook;
 }
 
 export default class HttpClient {
