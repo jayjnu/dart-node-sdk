@@ -22,11 +22,14 @@ export default class HttpClient {
     });
   }
 
-  async getJSON<T extends ResponseCommon>(
+  async getJSON<Request, Response extends ResponseCommon>(
     url: string,
-    params?: Record<string, unknown>
-  ): Promise<T> {
-    const json = await this.fetch(url, params).json<T>();
+    params?: Request
+  ): Promise<Response> {
+    const json = await this.fetch(
+      url,
+      params as Record<string, unknown>
+    ).json<Response>();
 
     if (json.status !== '000') {
       throw new Error(json.message);
