@@ -59,6 +59,15 @@ describe('CorpCodeModel', () => {
       expect(corpList[0].corp_name).toBe(fixtures[0].corp_name);
       expect(corpList[1].corp_name).toBe(fixtures[1].corp_name);
     });
-    it.todo('매칭되는 항목이 없으면 빈 배열을 반환한다.');
+    it('매칭되는 항목이 없으면 빈 배열을 반환한다.', async () => {
+      const options = {
+        exact: false,
+      };
+      const api = createMockAPI();
+      const model = new CorpCodeModel(api);
+      const corpList = await model.getCorpByName('ㅁ암눙', options);
+
+      expect(corpList.length).toBe(0);
+    });
   });
 });
