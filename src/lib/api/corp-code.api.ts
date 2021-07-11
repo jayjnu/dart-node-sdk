@@ -1,6 +1,5 @@
 import { mapEntries } from '~/util/object.util';
-
-import type { HttpClient } from '~/util/http.util';
+import HttpClient from '~/util/http.util';
 
 export interface Corp {
   corp_code: number;
@@ -36,25 +35,21 @@ export interface XMLHandlingProcess<T> {
 }
 
 export class CorpCodeAPI {
+  private endpoint = 'corpCode.xml';
   constructor(
     private http: HttpClient,
-    private cert_key: string,
     private xmlHandler: XMLHandler<XMLParsingResult>
   ) {}
 
   async getJSON(): Promise<CorpCodeResponse> {
-    const zippedXML = await this.fetch().buffer();
+    const zippedXML = await this.fetch(this.endpoint).buffer();
     const json = await this.xmlHandler.fromZipBuffer(zippedXML).json();
 
     return this.normalizeJSON(json);
   }
 
-  private fetch() {
-    return this.http.get('corpCode.xml', {
-      searchParams: {
-        crtfc_key: this.cert_key,
-      },
-    });
+  private fetch(endpoint: string) {
+    return this.http.fetch(endpoint);
   }
 
   private normalizeJSON(json: XMLParsingResult): CorpCodeResponse {

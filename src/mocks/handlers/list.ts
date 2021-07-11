@@ -3,7 +3,7 @@ import LIST_DATA from '../data/list';
 
 export default [
   rest.get('https://opendart.fss.or.kr/api/list.json', (req, res, ctx) => {
-    if (!req.url.searchParams.has('cert_key')) {
+    if (!req.url.searchParams.has('crtfc_key')) {
       return res(ctx.status(403));
     }
     const corp_code = req.url.searchParams.get('corp_code');

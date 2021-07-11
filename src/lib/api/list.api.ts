@@ -1,4 +1,5 @@
-import { HttpClient } from '~/util/http.util';
+import { ResponseCommon } from './type';
+import HttpClient from '~/util/http.util';
 
 export interface ListRequest {
   /**
@@ -47,15 +48,7 @@ export interface ListRequest {
   page_count?: string;
 }
 
-export interface ListResponse {
-  /**
-   * 에러 및 정보 코드
-   */
-  status: string;
-  /**
-   * 에러 및 정보 메시지
-   */
-  message: string;
+export interface ListResponse extends ResponseCommon {
   /**
    * 페이지 번호
    */
@@ -113,26 +106,10 @@ export interface ListResponse {
 }
 
 export class ListAPI {
-  constructor(private http: HttpClient, private cert_key: string) {}
+  private endpoint = 'list.json';
+  constructor(private http: HttpClient) {}
 
   async getJSON(params: ListRequest): Promise<ListResponse> {
-    const json = (await this.http
-      .get(ListAPI.createURL(), {
-        searchParams: {
-          cert_key: this.cert_key,
-          ...params,
-        },
-      })
-      .json()) as ListResponse;
-
-    if (json.status !== '000') {
-      throw new Error(json.message);
-    }
-
-    return json;
-  }
-
-  private static createURL() {
-    return 'list.json';
+    return this.http.getJSON(this.endpoint, { ...params });
   }
 }

@@ -1,7 +1,6 @@
-import type { HttpClient } from '~/util/http.util';
+import HttpClient from '~/util/http.util';
 
 export interface CompanyRequest {
-  crtfc_key: string;
   corp_code: string;
 }
 
@@ -88,13 +87,13 @@ export interface CompanyResponse {
 }
 
 export class CompanyAPI {
-  constructor(private http: HttpClient, private cert_key: string) {}
+  private endpoint = 'company.json';
+  constructor(private http: HttpClient) {}
 
-  async getJSON(corp_code: string): Promise<CompanyResponse> {
-    return this.http.get(this.createURL(corp_code)).json();
-  }
-
-  private createURL(corp_code: string) {
-    return `company.json?crtfc_key=${this.cert_key}&corp_code=${corp_code}`;
+  async getJSON(params: CompanyRequest): Promise<CompanyResponse> {
+    // TODO Question
+    // return this.http.getJSON(query); 를 하면
+    // `Typescript: Index signature is missing in type` 라고 나옴. 해결 가능한건지?
+    return this.http.getJSON(this.endpoint, { ...params });
   }
 }
