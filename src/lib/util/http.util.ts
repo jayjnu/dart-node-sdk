@@ -1,15 +1,16 @@
 import got, { Got } from 'got';
 import { ResponseCommon } from '../api/type';
-import { CancelableRequest, Response } from 'got/dist/source/as-promise';
+import { CancelableRequest, Hooks, Response } from 'got/dist/source/as-promise';
 
 export default class HttpClient {
   private http: Got;
-  constructor(private cert_key: string) {
+  constructor(private cert_key: string, hooks?: Hooks) {
     this.http = got.extend({
       prefixUrl: 'https://opendart.fss.or.kr/api',
       searchParams: {
         crtfc_key: this.cert_key,
       },
+      hooks,
     });
   }
 
@@ -19,7 +20,6 @@ export default class HttpClient {
   ): CancelableRequest<Response<string>> {
     return this.http.get(url, {
       searchParams: params,
-      hooks: {},
     });
   }
 
