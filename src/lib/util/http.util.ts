@@ -1,4 +1,8 @@
 import got from 'got';
+/**
+ * TODO: low level 코드가 high level type에 의존성을 가지고 있음
+ * 공통 에러 핸들링은 hooks 에 추상화 해서 옮긴뒤 해당 타입에 대한 의존성을 제거해야한다.
+ */
 import type { ResponseCommon } from '../api/type';
 import type {
   Got,
