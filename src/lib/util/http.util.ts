@@ -1,6 +1,16 @@
-import got, { Got } from 'got';
-import { ResponseCommon } from '../api/type';
-import { CancelableRequest, Hooks, Response } from 'got/dist/source/as-promise';
+import got from 'got';
+import type { ResponseCommon } from '../api/type';
+import type {
+  Got,
+  CancelableRequest,
+  BeforeRequestHook,
+  Hooks,
+  Response,
+} from 'got';
+
+export interface HttpInterceptor {
+  beforeRequest: BeforeRequestHook;
+}
 
 export default class HttpClient {
   private http: Got;
