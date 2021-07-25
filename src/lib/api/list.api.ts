@@ -109,7 +109,7 @@ export class ListAPI {
   private endpoint = 'list.json';
   constructor(private http: HttpClient) {}
 
-  async getJSON(params: ListRequest): Promise<ListResponse> {
+  async getJSON(params?: ListRequest): Promise<ListResponse> {
     return this.http.getJSON(this.endpoint, { ...params });
   }
 }
