@@ -1,6 +1,6 @@
 {
   "name": "dart-node-sdk",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "dart api implementation in node",
   "main": "dist/public-api.js",
   "scripts": {
